@@ -13,7 +13,7 @@ const verifyUserAlreadyExistsMiddleware = async (
   const user = await userReposiroty.findOneBy({ email: newUserData.email });
 
   if (user) {
-    throw new AppError(400, "Email already registred");
+    throw new AppError(409, "Email already registred");
   }
 
   return next();

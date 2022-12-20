@@ -7,9 +7,10 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn,
     OneToOne,
-    JoinColumn
+    JoinColumn, ManyToOne
 } from "typeorm";
 import {Address} from "./addresses.entity";
+import {Category} from "./categories.entity";
 
 @Entity("properties")
 class Propertie {
@@ -33,6 +34,9 @@ class Propertie {
 
     @OneToOne(() => Address) @JoinColumn()
     address: Address;
+
+    @ManyToOne(() => Category, category => category.propeties)
+    category: Category;
 }
 
 export { Propertie };
