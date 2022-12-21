@@ -1,10 +1,13 @@
 import { Request, Response } from "express";
-import { actualizeUserService } from "../../services/users/actualizeUser.service";
-import { serializeRegistService } from "../../services/users/serializeRegist.service";
+import { actualizeUserService } from "../../services/user/actualizeUser.service";
+import { serializeRegistService } from "../../services/user/serializeRegist.service";
 
 export const actualizeUserController = async (req: Request, res: Response) => {
-  const data = await actualizeUserService(req.params.id, req.body);
-  const responseData = await serializeRegistService(data);
+  const updatedUser = await actualizeUserService(
+    req.validatedID,
+    req.validatedBody
+  );
+  const serializedReponse = await serializeRegistService(updatedUser);
 
-  return res.status(200).json(responseData);
+  return res.status(200).json(serializedReponse);
 };

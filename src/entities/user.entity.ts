@@ -1,45 +1,48 @@
-import { hashSync } from "bcryptjs";
+import { getRounds, hashSync } from "bcryptjs";
 import {
-    BeforeInsert,
-    BeforeUpdate,
-    Column,
-    CreateDateColumn,
-    Entity,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn,
+  BeforeInsert,
+  BeforeUpdate,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 
 @Entity("users")
 class User {
-    @Column()
+  @Column()
   name: string;
 
-    @Column({unique: true})
+  @Column({ unique: true })
   email: string;
 
-    @Column()
+  @Column()
   password: string;
 
-    @Column()
+  @Column()
   isAdm: boolean;
 
-    @Column({ default: true })
+  @Column({ default: true })
   isActive: boolean;
 
-    @CreateDateColumn()
+  @CreateDateColumn()
   createdAt: Date;
 
-    @UpdateDateColumn()
+  @UpdateDateColumn()
   updatedAt: Date;
 
-    @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
-    @BeforeUpdate()
+  @BeforeUpdate()
   @BeforeInsert()
   hashPassword() {
-        this.password = hashSync(this.password, 10);
+    const isHashed = getRounds(this.password);
+    if (!isHashed) {
+      this.password = hashSync(this.password, 10);
     }
+  }
 }
 
 export { User };

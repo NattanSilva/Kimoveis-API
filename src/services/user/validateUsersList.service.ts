@@ -1,8 +1,8 @@
 import { IUser } from "../../interfaces/users";
-import { listUsersReturn } from "../../serializers/user.serializers";
+import { listUsersReponse } from "../../serializers/user.serializers";
 
 const validateUsersListService = async (list: IUser[]): Promise<IUser[]> => {
-  const validatedList = await listUsersReturn.validate(list, {
+  const validatedList = await listUsersReponse.validate(list, {
     stripUnknown: true,
   });
 

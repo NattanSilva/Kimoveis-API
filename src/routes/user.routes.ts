@@ -1,34 +1,60 @@
 import { Router } from "express";
-import { listUsersController } from "../controllers/admin/listUsers.controller";
-import { softDeleteController } from "../controllers/admin/softDelete.controller";
-import { actualizeUserController } from "../controllers/user/actualizeUser.controller";
-import { createUserController } from "../controllers/user/createUser.controller";
-import verifyActualizeBodyMiddleware from "../middlewares/user/actualizeBody.middleware";
-import verifyActualizePermissionsMiddleware from "../middlewares/user/actualizePermissions.middleware";
-import verifyIsAdmMiddleware from "../middlewares/user/isAdm.middleware";
-import verifyRegistBodyMiddleware from "../middlewares/user/registBody.middleware";
-import verifyUserAlreadyExistsMiddleware from "../middlewares/user/userAlredyExists.middleware";
-import verifyUserIdIsValidMiddleware from "../middlewares/user/userId.middleware";
+
+import {
+  actualizeUserController,
+  createUserController,
+  listUsersController,
+  softDeleteController,
+} from "../controllers";
+
+import {
+  ensureAuthMiddleware,
+  validateBodyMiddleware,
+  verifyIsAdmMiddleware,
+  verifyUpdateBodyMiddleware,
+  verifyUpdatePermissionsMiddleware,
+  verifyUserAlreadyExistsMiddleware,
+  verifyUserIdIsValidMiddleware,
+} from "../middlewares";
+
+import {
+  registRequestBody,
+  updateRequestBody,
+} from "../serializers/user.serializers";
 
 const userRoutes = Router();
 
 userRoutes.post(
   "",
-  verifyRegistBodyMiddleware,
+  validateBodyMiddleware(registRequestBody),
   verifyUserAlreadyExistsMiddleware,
   createUserController
 );
 
-userRoutes.get("", verifyIsAdmMiddleware, listUsersController);
+userRoutes.get(
+  "",
+  ensureAuthMiddleware,
+  verifyIsAdmMiddleware,
+  listUsersController
+);
 
 userRoutes.patch(
   "/:id",
+  verifyUpdateBodyMiddleware,
+  ensureAuthMiddleware,
+  verifyUserAlreadyExistsMiddleware,
   verifyUserIdIsValidMiddleware,
-  verifyActualizePermissionsMiddleware,
-  verifyActualizeBodyMiddleware,
+  verifyUpdatePermissionsMiddleware,
+  validateBodyMiddleware(updateRequestBody),
   actualizeUserController
 );
 
-userRoutes.delete("/:id", verifyIsAdmMiddleware, softDeleteController);
+userRoutes.delete(
+  "/:id",
+  verifyUserIdIsValidMiddleware,
+  ensureAuthMiddleware,
+  verifyIsAdmMiddleware,
+  softDeleteController
+);
 
 export default userRoutes;

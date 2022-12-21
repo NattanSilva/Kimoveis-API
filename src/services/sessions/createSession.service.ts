@@ -25,11 +25,7 @@ export const createSessionService = async ({
     throw new AppError(403, "Email or password invalid");
   }
 
-  if (!process.env.SECRET_KEY) {
-    throw new AppError(400, "SECRET_KEY is required!");
-  }
-
-  const token = jwt.sign({}, process.env.SECRET_KEY, {
+  const token = jwt.sign({}, process.env.SECRET_KEY!, {
     subject: user.id,
     expiresIn: "24H",
   });

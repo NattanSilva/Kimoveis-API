@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { ValidationError } from "yup";
 import { AppError } from "./AppError";
 
 const handleError = async (
@@ -11,9 +12,13 @@ const handleError = async (
     return res.status(error.statusCode).json({ message: error.message });
   }
 
+  if (error instanceof ValidationError) {
+    throw new AppError(400, error.message);
+  }
+
   console.log(error);
 
-  return res.status(500).json({ message: "Interna server error" });
+  return res.status(500).json({ message: "Internal server error" });
 };
 
 export default handleError;

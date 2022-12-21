@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { listUsersService } from "../../services/admin/listUsers.service";
-import { validateUsersListService } from "../../services/admin/validateUsersList.service";
+import { listUsersService } from "../../services/user/listUsers.service";
+import { validateUsersListService } from "../../services/user/validateUsersList.service";
 
 const listUsersController = async (req: Request, res: Response) => {
   const list = await listUsersService();

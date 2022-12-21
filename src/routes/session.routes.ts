@@ -1,9 +1,14 @@
 import { Router } from "express";
-import { createSessionController } from "../controllers/session/createSession.controller";
-import verifySessionBodyMiddleware from "../middlewares/session/sessionBody.middlware";
+import { createSessionController } from "../controllers";
+import { validateBodyMiddleware } from "../middlewares";
+import { loginRequestBody } from "../serializers/session.serializers";
 
 const sessionRoutes = Router();
 
-sessionRoutes.post("", verifySessionBodyMiddleware, createSessionController);
+sessionRoutes.post(
+  "",
+  validateBodyMiddleware(loginRequestBody),
+  createSessionController
+);
 
 export default sessionRoutes;

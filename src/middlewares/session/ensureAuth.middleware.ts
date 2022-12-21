@@ -8,20 +8,20 @@ const ensureAuthMiddleware = async (
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.headers.authorization?.split(" ")[1];
+  const auth = req.headers.authorization;
 
-  if (!token) {
+  if (!auth) {
     throw new AppError(401, "Invalid token");
   }
 
-  if (!process.env.SECRET_KEY) {
-    throw new AppError(400, "SECRET_KEY is required");
-  }
+  const token = auth.split(" ")[1];
 
-  jwt.verify(token, process.env.SECRET_KEY, (error, decoded) => {
+  jwt.verify(token, process.env.SECRET_KEY!, (error, decoded) => {
     if (error) {
       throw new AppError(401, error.message);
     }
+
+    req.decodedId = decoded?.sub as string;
   });
 
   return next();
