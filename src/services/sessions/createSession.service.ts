@@ -19,6 +19,10 @@ export const createSessionService = async ({
     throw new AppError(401, "Email or password invalid");
   }
 
+  if(!user.isActive) {
+      throw new AppError(400, "User desatived or deleted")
+  }
+
   const passwordMatch = await compare(password, user.password);
 
   if (!passwordMatch) {

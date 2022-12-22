@@ -7,6 +7,5 @@ export const createUserController = async (req: Request, res: Response) => {
   const userData: IUserRequest = req.validatedBody;
   const createdUser = await createUserService(userData);
   const sarializedResponse = await serializeRegistService(createdUser);
-  console.log(serializeRegistService);
   return res.status(201).json(sarializedResponse);
 };

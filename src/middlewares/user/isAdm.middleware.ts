@@ -12,7 +12,7 @@ const verifyIsAdmMiddleware = async (
 
   const userRepository = AppDataSource.getRepository(User);
   const currentUser = await userRepository.findOneBy({
-    id: decodedId as string,
+    id: decodedId,
   });
 
   if (!currentUser?.isAdm) {
