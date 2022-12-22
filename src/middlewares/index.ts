@@ -5,6 +5,8 @@ import verifyUpdatePermissionsMiddleware from "./user/updatePermissions.middlewa
 import verifyUserAlreadyExistsMiddleware from "./user/userAlredyExists.middleware";
 import verifyUserIdIsValidMiddleware from "./user/userId.middleware";
 import validateBodyMiddleware from "./validateBody.middleware";
+import verifyCategoryAlreadyExistsMiddleware from "./category/CategoryAlreadyExists.middleware";
+import validateCategoryIdMiddleware from "./category/validateCategoryId.middleware";
 
 export {
   ensureAuthMiddleware,
@@ -14,4 +16,6 @@ export {
   verifyUserAlreadyExistsMiddleware,
   verifyUserIdIsValidMiddleware,
   validateBodyMiddleware,
+  verifyCategoryAlreadyExistsMiddleware,
+  validateCategoryIdMiddleware
 };

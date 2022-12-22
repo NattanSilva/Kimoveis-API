@@ -1,4 +1,5 @@
 import * as express from "express";
+import {Category} from "../../entities/categories.entity";
 
 declare global {
   namespace Express {
@@ -6,6 +7,7 @@ declare global {
       validatedBody: any,
       decodedId: string,
       validatedID: string,
+      foundCategory: Category
     }
   }
 }
