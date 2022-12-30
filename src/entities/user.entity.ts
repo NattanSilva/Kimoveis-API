@@ -1,13 +1,14 @@
 import { getRounds, hashSync } from "bcryptjs";
 import {
-  BeforeInsert,
-  BeforeUpdate,
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
+    BeforeInsert,
+    BeforeUpdate,
+    Column,
+    CreateDateColumn,
+    Entity, OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
 } from "typeorm";
+import {Schedules_user_properties} from "./schedules_user_properties.entity";
 
 @Entity("users")
 class User {
@@ -34,6 +35,9 @@ class User {
 
   @PrimaryGeneratedColumn("uuid")
   id: string;
+
+  @OneToMany(() => Schedules_user_properties, schedules_user_properties => schedules_user_properties.user)
+  schedules_user: Schedules_user_properties;
 
   @BeforeUpdate()
   @BeforeInsert()

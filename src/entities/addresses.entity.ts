@@ -9,10 +9,10 @@ class Address {
     district: String;
 
     @Column()
-    ziCode: String;
+    zipCode: String;
 
     @Column({nullable: true})
-    number: String;
+    number?: String;
 
     @Column()
     city: String;
