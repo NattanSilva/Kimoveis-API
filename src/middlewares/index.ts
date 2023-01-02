@@ -2,6 +2,8 @@ import verifyCategoryAlreadyExistsMiddleware from "./category/CategoryAlreadyExi
 import validateCategoryIdMiddleware from "./category/validateCategoryId.middleware";
 import verifyAddressAlreadyExists from "./property/verifyAddressAlreadyexists.middleware";
 import verifyPropertyCategoryIdMiddleware from "./property/verifyPropertyCategoryId.middleware";
+import verifyAvailabilityMiddleware from "./schedules/verifyAvailability.middleware";
+import verifyDateMiddleware from "./schedules/verifyDate.middleware";
 import ensureAuthMiddleware from "./session/ensureAuth.middleware";
 import verifyIsAdmMiddleware from "./user/isAdm.middleware";
 import verifyUpdateBodyMiddleware from "./user/updateBody.middleware";
@@ -22,4 +24,6 @@ export {
   validateCategoryIdMiddleware,
   verifyAddressAlreadyExists,
   verifyPropertyCategoryIdMiddleware,
+  verifyAvailabilityMiddleware,
+  verifyDateMiddleware,
 };
