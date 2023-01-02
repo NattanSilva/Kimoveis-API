@@ -6,6 +6,7 @@ import sessionRoutes from "./routes/session.routes";
 import handleError from "./errors/handleError";
 import categoryRoutes from "./routes/category.routes";
 import propertyRoutes from "./routes/property.routes";
+import schedulesRoutes from "./routes/schedules.routes";
 
 
 const app = express();
@@ -14,6 +15,7 @@ app.use("/users" ,userRoutes);
 app.use("/login" ,sessionRoutes);
 app.use("/properties", propertyRoutes);
 app.use("/categories" ,categoryRoutes);
+app.use("/schedules", schedulesRoutes);
 
 app.use(handleError);
 
