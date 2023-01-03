@@ -3,6 +3,7 @@ import { listCategoriesController } from "./category/listCategories.controller";
 import { listPropertiesByCategoryController } from "./category/listPropertiesByCategory.controller";
 import { listPropertiesController } from "./property/listProperties.controller";
 import { createScheludeController } from "./schedules/createSchedule.controller";
+import { listSchedulesByPropertyController } from "./schedules/listschedulesByProperty.controller";
 import { createSessionController } from "./session/createSession.controller";
 import { actualizeUserController } from "./user/actualizeUser.controller";
 import { createUserController } from "./user/createUser.controller";
@@ -20,4 +21,5 @@ export {
   listPropertiesByCategoryController,
   listPropertiesController,
   createScheludeController,
+  listSchedulesByPropertyController,
 };
